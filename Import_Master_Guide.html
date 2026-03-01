@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Import Master Guide — Chine ➝ Sénégal</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --navy-mid: #1a2f5e;
+    --blue: #2348a0;
+    --gold: #f5a623;
+    --gold-light: #ffd97d;
+    --cream: #faf8f3;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --white: #ffffff;
+    --card-bg: #f0f4ff;
+    --success: #16a34a;
+    --danger: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,27,62,0.96);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 60px;
+    border-bottom: 1px solid rgba(245,166,35,0.2);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 15px;
+    color: var(--white); letter-spacing: 0.05em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links {
+    display: flex; gap: 6px;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none; font-size: 12px;
+    padding: 5px 12px; border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); background: rgba(245,166,35,0.1); }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed; top: 60px; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), #ff9a3c);
+    width: 0%; z-index: 99; transition: width 0.1s;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 100px 40px 60px;
+    position: relative;
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  section.visible { opacity: 1; transform: translateY(0); }
+
+  .container { max-width: 900px; margin: 0 auto; width: 100%; }
+
+  /* ── COVER ── */
+  #cover {
+    background: var(--navy);
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  #cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(35,72,160,0.6) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(245,166,35,0.15) 0%, transparent 60%);
+  }
+  #cover::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .cover-content { position: relative; z-index: 2; }
+
+  .cover-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,166,35,0.15);
+    border: 1px solid rgba(245,166,35,0.4);
+    color: var(--gold); font-size: 12px; font-weight: 500;
+    padding: 6px 16px; border-radius: 20px; margin-bottom: 32px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .cover-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: clamp(38px, 6vw, 72px);
+    color: var(--white); line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .cover-title span { color: var(--gold); }
+
+  .cover-subtitle {
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: rgba(255,255,255,0.55); font-weight: 300;
+    margin-bottom: 40px; max-width: 520px; line-height: 1.5;
+  }
+
+  .cover-features {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px; margin-bottom: 48px;
+  }
+  .cover-feat {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    transition: all 0.3s;
+  }
+  .cover-feat:hover {
+    background: rgba(245,166,35,0.1);
+    border-color: rgba(245,166,35,0.3);
+    transform: translateY(-2px);
+  }
+  .cover-feat .icon { font-size: 22px; }
+  .cover-feat p { color: rgba(255,255,255,0.8); font-size: 13px; font-weight: 400; }
+
+  .cover-budget {
+    display: inline-flex; align-items: center; gap: 16px;
+    background: linear-gradient(135deg, var(--gold), #ff9a3c);
+    border-radius: 16px; padding: 18px 28px;
+  }
+  .cover-budget .amount {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 24px; color: var(--navy);
+  }
+  .cover-budget .label { font-size: 12px; color: rgba(13,27,62,0.7); font-weight: 500; }
+
+  /* ── SECTION HEADERS ── */
+  .section-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: clamp(28px, 4vw, 48px);
+    color: var(--navy); line-height: 1.1; margin-bottom: 16px;
+  }
+  .section-desc {
+    font-size: 16px; color: var(--muted); max-width: 580px;
+    line-height: 1.65; margin-bottom: 40px;
+  }
+
+  /* dark sections */
+  section.dark {
+    background: var(--navy);
+  }
+  section.dark .section-title { color: var(--white); }
+  section.dark .section-desc { color: rgba(255,255,255,0.5); }
+
+  section.blue {
+    background: linear-gradient(135deg, #1a2f5e 0%, #0d1b3e 100%);
+  }
+  section.blue .section-title { color: var(--white); }
+  section.blue .section-desc { color: rgba(255,255,255,0.5); }
+
+  /* ── CARDS ── */
+  .cards-grid {
+    display: grid; gap: 16px;
+  }
+  .cards-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .cards-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: var(--white);
+    border-radius: 20px; padding: 28px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: all 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+  .card.gold-border { border-top: 3px solid var(--gold); }
+  .card.blue-border { border-top: 3px solid var(--blue); }
+  .card.navy-bg {
+    background: var(--navy-mid);
+    border-color: rgba(255,255,255,0.1);
+  }
+  .card .card-icon { font-size: 32px; margin-bottom: 14px; }
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 17px; color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .card.navy-bg h3 { color: var(--white); }
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .card.navy-bg p { color: rgba(255,255,255,0.5); }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 16px; }
+  .step {
+    display: flex; align-items: flex-start; gap: 20px;
+    background: var(--white); border-radius: 16px; padding: 20px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: all 0.3s;
+  }
+  .step:hover { transform: translateX(6px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+  .step-num {
+    width: 36px; height: 36px; min-width: 36px;
+    background: linear-gradient(135deg, var(--blue), var(--navy));
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 14px;
+    color: var(--white);
+  }
+  .step-content h4 {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 15px; color: var(--navy); margin-bottom: 4px;
+  }
+  .step-content p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* dark steps */
+  .step.dark-step {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.1);
+  }
+  .step.dark-step .step-content h4 { color: var(--white); }
+  .step.dark-step .step-content p { color: rgba(255,255,255,0.45); }
+
+  /* ── CRITERIA TABLE ── */
+  .criteria-list { display: flex; flex-direction: column; gap: 10px; }
+  .criteria-item {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--white); border-radius: 14px; padding: 16px 20px;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: all 0.25s;
+  }
+  .criteria-item:hover { border-color: var(--gold); background: #fffdf5; }
+  .criteria-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold); min-width: 8px;
+  }
+  .criteria-item .c-label {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 13px; color: var(--navy); min-width: 120px;
+  }
+  .criteria-item .c-val { font-size: 13px; color: var(--muted); }
+
+  /* ── SUPPLIER TYPES ── */
+  .supplier-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .supplier-card {
+    border-radius: 20px; padding: 28px 22px; text-align: center;
+    position: relative; overflow: hidden; transition: all 0.3s;
+  }
+  .supplier-card:hover { transform: translateY(-6px); }
+  .supplier-card.usine { background: linear-gradient(135deg, #0d1b3e, #1a2f5e); }
+  .supplier-card.grossiste { background: linear-gradient(135deg, #1a3a6e, #2348a0); }
+  .supplier-card.revendeur { background: linear-gradient(135deg, #1e4a8a, #2e6abf); }
+  .supplier-card .s-icon { font-size: 36px; margin-bottom: 12px; }
+  .supplier-card h3 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: 18px; color: var(--white); margin-bottom: 16px;
+  }
+  .supplier-card .s-tag {
+    display: inline-block; padding: 4px 12px; border-radius: 20px;
+    font-size: 12px; margin: 3px;
+  }
+  .tag-green { background: rgba(22,163,74,0.2); color: #4ade80; }
+  .tag-red { background: rgba(220,38,38,0.2); color: #f87171; }
+
+  /* ── PRICING ── */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .price-card {
+    background: var(--white); border-radius: 16px; padding: 22px 16px;
+    text-align: center; border: 1px solid rgba(0,0,0,0.07);
+    transition: all 0.3s;
+  }
+  .price-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+  .price-card .prod { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px; color: var(--navy); }
+  .price-card .cost { font-size: 12px; color: var(--muted); margin: 4px 0; }
+  .price-card .margin-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 10px;
+    font-size: 11px; font-weight: 600; margin: 6px 0;
+  }
+  .price-card .price-val { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; color: var(--blue); }
+  .price-card .profit { font-size: 12px; font-weight: 600; color: var(--success); margin-top: 4px; }
+
+  /* ── FORMULA ── */
+  .formula-box {
+    background: linear-gradient(135deg, var(--gold), #ff9a3c);
+    border-radius: 20px; padding: 32px 36px; text-align: center;
+    margin-bottom: 32px;
+  }
+  .formula-box .f-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(13,27,62,0.6); margin-bottom: 8px; }
+  .formula-box .f-formula {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px; color: var(--navy);
+  }
+  .formula-box .f-example { font-size: 13px; color: rgba(13,27,62,0.65); margin-top: 10px; }
+
+  /* ── ERRORS ── */
+  .error-list { display: flex; flex-direction: column; gap: 10px; }
+  .error-item {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 14px; padding: 16px 20px;
+    transition: all 0.25s;
+  }
+  .error-item:hover { background: rgba(220,38,38,0.1); }
+  .error-icon { font-size: 20px; }
+  .error-item p { font-size: 14px; color: var(--text); }
+
+  /* ── 7-DAY PLAN ── */
+  .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .plan-day {
+    background: var(--white); border-radius: 16px; padding: 20px;
+    border: 1px solid rgba(0,0,0,0.07); transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .plan-day::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--blue));
+  }
+  .plan-day:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+  .plan-day .day-num {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 28px;
+    color: rgba(0,0,0,0.06); line-height: 1; margin-bottom: 8px;
+  }
+  .plan-day h4 {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .plan-day p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ── MESSAGES ── */
+  .msg-box {
+    border-radius: 16px; padding: 20px 24px; margin-bottom: 12px;
+    border-left: 4px solid;
+  }
+  .msg-box.cn { border-color: #e63946; background: #fff5f5; }
+  .msg-box.fr { border-color: var(--blue); background: #f0f4ff; }
+  .msg-box.en { border-color: var(--success); background: #f0fdf4; }
+  .msg-box .lang { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .msg-box.cn .lang { color: #e63946; }
+  .msg-box.fr .lang { color: var(--blue); }
+  .msg-box.en .lang { color: var(--success); }
+  .msg-box p { font-size: 14px; color: var(--text); line-height: 1.5; }
+
+  /* ── SHIPPING ── */
+  .shipping-compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .ship-card {
+    border-radius: 20px; padding: 28px; color: var(--white);
+  }
+  .ship-card.air { background: linear-gradient(135deg, #1a2f5e, #2348a0); }
+  .ship-card.sea { background: linear-gradient(135deg, #0d4a6e, #0a6e9e); }
+  .ship-card .ship-icon { font-size: 36px; margin-bottom: 12px; }
+  .ship-card h3 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 8px; }
+  .ship-card .ship-tag {
+    display: inline-block; background: rgba(245,166,35,0.25);
+    color: var(--gold-light); border-radius: 8px;
+    padding: 4px 12px; font-size: 12px; font-weight: 600; margin-bottom: 16px;
+  }
+  .ship-card .formula {
+    background: rgba(0,0,0,0.2); border-radius: 10px; padding: 12px 16px;
+    font-size: 13px; font-family: 'Syne', sans-serif; font-weight: 600; margin-bottom: 10px;
+  }
+  .ship-card .example { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+  /* ── AUTHOR ── */
+  .author-card {
+    background: var(--white); border-radius: 24px; padding: 40px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+    display: flex; gap: 32px; align-items: center;
+  }
+  .author-avatar {
+    width: 90px; height: 90px; min-width: 90px;
+    background: linear-gradient(135deg, var(--gold), #ff9a3c);
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 40px;
+  }
+  .author-info h3 {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px;
+    color: var(--navy); margin-bottom: 6px;
+  }
+  .author-info .role {
+    font-size: 13px; color: var(--gold); font-weight: 600; margin-bottom: 14px;
+  }
+  .author-info p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+  /* ── PLATFORMS ── */
+  .platforms { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+  .plat-card {
+    border-radius: 20px; padding: 28px 20px; text-align: center;
+    transition: all 0.3s; cursor: pointer;
+  }
+  .plat-card:hover { transform: scale(1.04); }
+  .plat-card.wa { background: linear-gradient(135deg, #25D366, #128C7E); }
+  .plat-card.tt { background: linear-gradient(135deg, #010101, #333); }
+  .plat-card.ig { background: linear-gradient(135deg, #E1306C, #833AB4, #FD1D1D); }
+  .plat-card.web { background: linear-gradient(135deg, #2348a0, #0d1b3e); }
+  .plat-card .plat-icon { font-size: 36px; margin-bottom: 10px; }
+  .plat-card h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: var(--white); }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(245,166,35,0.12), rgba(255,154,60,0.08));
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 16px; padding: 20px 24px;
+    display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px;
+  }
+  .highlight-box .h-icon { font-size: 22px; }
+  .highlight-box p { font-size: 15px; color: var(--text); line-height: 1.6; }
+  .highlight-box strong { color: var(--navy); }
+
+  /* ── BUDGET BAR ── */
+  .budget-items { display: flex; flex-direction: column; gap: 12px; }
+  .budget-row {
+    display: flex; align-items: center; gap: 16px;
+    background: rgba(255,255,255,0.07); border-radius: 12px; padding: 14px 20px;
+  }
+  .budget-row .b-label { font-size: 13px; color: rgba(255,255,255,0.7); flex: 1; }
+  .budget-row .b-amount {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 14px; color: var(--gold-light);
+  }
+  .budget-row.total {
+    background: linear-gradient(135deg, rgba(245,166,35,0.2), rgba(255,154,60,0.15));
+    border: 1px solid rgba(245,166,35,0.3);
+  }
+  .budget-row.total .b-label { color: var(--gold-light); font-weight: 600; }
+
+  /* ── SCROLL CTA ── */
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.35); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    animation: bounce 2s ease infinite;
+  }
+  .scroll-hint .arrow { font-size: 20px; }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px; background: linear-gradient(90deg, transparent, rgba(245,166,35,0.4), transparent);
+    margin: 32px 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    section { padding: 90px 20px 50px; }
+    .supplier-types { grid-template-columns: 1fr; }
+    .shipping-compare { grid-template-columns: 1fr; }
+    .author-card { flex-direction: column; text-align: center; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">IMPORT <span>MASTER</span> GUIDE</div>
+  <div class="nav-links">
+    <a href="#demarrer">Démarrer</a>
+    <a href="#1688">1688</a>
+    <a href="#fournisseurs">Fournisseurs</a>
+    <a href="#logistique">Logistique</a>
+    <a href="#prix">Prix</a>
+    <a href="#plan">Plan</a>
+  </div>
+</nav>
+<div id="progress-bar"></div>
+
+<!-- COVER -->
+<section id="cover">
+  <div class="container cover-content">
+    <div class="cover-badge">📘 Le guide #1 pour importer depuis la Chine</div>
+    <h1 class="cover-title">Import Master<br><span>Chine ➝ Sénégal</span></h1>
+    <p class="cover-subtitle">Importer facilement et en sécurité depuis la Chine. Méthode pas à pas pour débutants.</p>
+
+    <div class="cover-features">
+      <div class="cover-feat"><span class="icon">🔎</span><p>Maîtriser 1688 sans parler chinois</p></div>
+      <div class="cover-feat"><span class="icon">🏭</span><p>Trouver les bons fournisseurs</p></div>
+      <div class="cover-feat"><span class="icon">💳</span><p>Payer en sécurité depuis l'Afrique</p></div>
+      <div class="cover-feat"><span class="icon">✈️</span><p>Gérer la livraison jusqu'au Sénégal</p></div>
+      <div class="cover-feat"><span class="icon">💰</span><p>Calculer sa marge avec précision</p></div>
+      <div class="cover-feat"><span class="icon">🚀</span><p>Revendre rapidement sur WhatsApp & TikTok</p></div>
+    </div>
+
+    <div class="cover-budget">
+      <div>
+        <div class="amount">150 000 – 300 000 FCFA</div>
+        <div class="label">Budget idéal pour commencer</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Défiler</span>
+    <span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- SECTION 1 : DÉMARRER -->
+<section id="demarrer">
+  <div class="container">
+    <div class="section-num">Section 01</div>
+    <h2 class="section-title">Démarrer de zéro</h2>
+    <p class="section-desc">Ce guide s'adresse à toute personne souhaitant importer depuis la Chine, avec un petit capital et sans expérience préalable.</p>
+
+    <div class="cards-grid cards-2" style="margin-bottom: 32px;">
+      <div class="card gold-border">
+        <div class="card-icon">🎯</div>
+        <h3>Pour qui ?</h3>
+        <p>Commerçants, revendeurs, étudiants, entrepreneurs e-commerce, diaspora (France / Europe) — débutants avec petit capital.</p>
+      </div>
+      <div class="card gold-border">
+        <div class="card-icon">📍</div>
+        <h3>Zones géographiques</h3>
+        <p>Sénégal, Côte d'Ivoire, Mali, Cameroun, et diaspora africaine en France et en Europe.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <span class="h-icon">💡</span>
+      <p><strong>Stratégie clé pour débutants :</strong> Ne jamais prendre un seul produit. Tester <strong>3 à 5 petits produits différents</strong> pour identifier ce qui se vend le mieux avant d'investir davantage.</p>
+    </div>
+
+    <div class="budget-items" style="background: var(--navy); border-radius: 20px; padding: 28px;">
+      <div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; color: white; margin-bottom: 12px;">💰 Budget recommandé</div>
+      <div class="budget-row"><span class="b-label">🛍️ Achat produits</span><span class="b-amount">120 000 – 150 000 FCFA</span></div>
+      <div class="budget-row"><span class="b-label">✈️ Transport Chine → Sénégal</span><span class="b-amount">50 000 – 80 000 FCFA</span></div>
+      <div class="budget-row"><span class="b-label">🤝 Frais agent / paiement</span><span class="b-amount">10 000 – 20 000 FCFA</span></div>
+      <div class="budget-row total"><span class="b-label">⭐ TOTAL IDÉAL</span><span class="b-amount">150 000 – 300 000 FCFA</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 : 1688 -->
+<section id="1688" class="dark">
+  <div class="container">
+    <div class="section-num" style="color: var(--gold);">Section 02</div>
+    <h2 class="section-title">1688 & Outils</h2>
+    <p class="section-desc">Comment créer ton compte, naviguer sur la plateforme et traduire le chinois sans effort.</p>
+
+    <div style="margin-bottom: 32px;">
+      <div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: white; margin-bottom: 16px;">📲 Créer ton compte 1688</div>
+      <div class="steps">
+        <div class="step dark-step"><div class="step-num">1</div><div class="step-content"><h4>Télécharger l'app 1688</h4><p>Cherche le logo orange sur l'App Store ou Google Play</p></div></div>
+        <div class="step dark-step"><div class="step-num">2</div><div class="step-content"><h4>Accéder au profil</h4><p>Ouvrir l'app → cliquer sur "Profil"</p></div></div>
+        <div class="step dark-step"><div class="step-num">3</div><div class="step-content"><h4>Cliquer sur 注册</h4><p>C'est le bouton "S'inscrire" en chinois</p></div></div>
+        <div class="step dark-step"><div class="step-num">4</div><div class="step-content"><h4>Entrer ton numéro</h4><p>Sans le 0 au début, puis valider le code SMS reçu</p></div></div>
+        <div class="step dark-step"><div class="step-num">5</div><div class="step-content"><h4>Créer ton mot de passe</h4><p>Compte créé ✅</p></div></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: white; margin-bottom: 16px;">⭐ Méthode traduction : Google Lens</div>
+    <div class="cards-grid cards-3">
+      <div class="card navy-bg"><div class="card-icon">📸</div><h3>Capture d'écran</h3><p>Prends une capture de la page 1688 que tu veux traduire</p></div>
+      <div class="card navy-bg"><div class="card-icon">🔍</div><h3>Google Lens</h3><p>Ouvre Google Photos → clique sur l'icône Lens</p></div>
+      <div class="card navy-bg"><div class="card-icon">🌐</div><h3>Traduction instantanée</h3><p>Appuie sur "Traduire" — tout devient français !</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 : FOURNISSEURS -->
+<section id="fournisseurs">
+  <div class="container">
+    <div class="section-num">Section 03</div>
+    <h2 class="section-title">Choisir ses fournisseurs</h2>
+    <p class="section-desc">Les critères essentiels pour identifier un fournisseur fiable et éviter les arnaques.</p>
+
+    <div class="criteria-list" style="margin-bottom: 36px;">
+      <div class="criteria-item"><div class="criteria-dot"></div><span class="c-label">⏳ Ancienneté</span><span class="c-val">Minimum 3 ans — idéal 5 ans et plus</span></div>
+      <div class="criteria-item"><div class="criteria-dot"></div><span class="c-label">🏅 Badge</span><span class="c-val">工厂 (Usine) • 实力商家 (Puissant) • 生产厂家 (Fabricant)</span></div>
+      <div class="criteria-item"><div class="criteria-dot"></div><span class="c-label">📦 Commandes</span><span class="c-val">Beaucoup de ventes = produit validé par le marché</span></div>
+      <div class="criteria-item"><div class="criteria-dot"></div><span class="c-label">⭐ Avis</span><span class="c-val">Lire les commentaires clients, même traduits</span></div>
+      <div class="criteria-item"><div class="criteria-dot"></div><span class="c-label">📐 MOQ</span><span class="c-val">Quantité minimale cohérente — ni trop bas, ni trop haut</span></div>
+      <div class="criteria-item"><div class="criteria-dot"></div><span class="c-label">📷 Photos</span><span class="c-val">Stock, atelier, machines, emballage = sérieux</span></div>
+      <div class="criteria-item"><div class="criteria-dot"></div><span class="c-label">💬 Chat</span><span class="c-val">Réponses rapides et claires = bon signe</span></div>
+      <div class="criteria-item"><div class="criteria-dot"></div><span class="c-label">💲 Prix</span><span class="c-val">Si c'est trop bon marché, c'est un signal d'alerte</span></div>
+    </div>
+
+    <div class="supplier-types">
+      <div class="supplier-card usine">
+        <div class="s-icon">🏭</div>
+        <h3>Usine</h3>
+        <span class="s-tag tag-green">Prix très bas</span>
+        <span class="s-tag tag-green">Personnalisation</span>
+        <span class="s-tag tag-red">MOQ élevé</span>
+      </div>
+      <div class="supplier-card grossiste">
+        <div class="s-icon">🏢</div>
+        <h3>Grossiste</h3>
+        <span class="s-tag tag-green">Flexible</span>
+        <span class="s-tag tag-green">Rapide</span>
+        <span class="s-tag tag-red">Prix + élevé</span>
+      </div>
+      <div class="supplier-card revendeur">
+        <div class="s-icon">🧍</div>
+        <h3>Revendeur</h3>
+        <span class="s-tag tag-green">Petites qtés</span>
+        <span class="s-tag tag-green">Idéal tester</span>
+        <span class="s-tag tag-red">Marge faible</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 16px;">📨 Messages à envoyer</div>
+    <div class="msg-box cn"><div class="lang">🇨🇳 Chinois</div><p>你好，我对这个产品感兴趣。请问批发最低价格是多少？谢谢。</p></div>
+    <div class="msg-box fr"><div class="lang">🇫🇷 Français</div><p>Bonjour, je suis intéressé. Quel est votre meilleur prix en gros ?</p></div>
+    <div class="msg-box en"><div class="lang">🇬🇧 Anglais</div><p>Hello, I am interested. What is your best wholesale price?</p></div>
+  </div>
+</section>
+
+<!-- SECTION 4 : LOGISTIQUE -->
+<section id="logistique" class="blue">
+  <div class="container">
+    <div class="section-num" style="color: var(--gold);">Section 04 & 05</div>
+    <h2 class="section-title">Agents & Shipping</h2>
+    <p class="section-desc">Comment utiliser un agent pour payer et livrer tes produits en toute sécurité.</p>
+
+    <div class="cards-grid cards-2" style="margin-bottom: 32px;">
+      <div class="card navy-bg"><div class="card-icon">🤝</div><h3>Agents recommandés</h3><p>Superbuy • Max Sourcing • Leeline Sourcing • Supplyia</p></div>
+      <div class="card navy-bg"><div class="card-icon">💳</div><h3>Paiement sans carte internationale</h3><p>Utilise un agent comme Superbuy qui paie à ta place, ou ton transitaire local.</p></div>
+    </div>
+
+    <div class="shipping-compare">
+      <div class="ship-card air">
+        <div class="ship-icon">✈️</div>
+        <h3>Fret Aérien</h3>
+        <div class="ship-tag">7 – 15 jours</div>
+        <div class="formula">L × l × H ÷ 6 000 = poids volumétrique</div>
+        <div class="example">Ex : 50×40×30 cm → 10 kg → 10 × 6$ = <strong style="color:var(--gold-light)">60$</strong></div>
+      </div>
+      <div class="ship-card sea">
+        <div class="ship-icon">🚢</div>
+        <h3>Fret Maritime</h3>
+        <div class="ship-tag">45 – 90 jours</div>
+        <div class="formula">L × l × H (en mètres) = CBM</div>
+        <div class="example">Ex : 1,2 × 1 × 0,8 = 0,96 CBM → <strong style="color:var(--gold-light)">115,2$</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 : PRIX -->
+<section id="prix">
+  <div class="container">
+    <div class="section-num">Section 07</div>
+    <h2 class="section-title">Calcul des prix</h2>
+    <p class="section-desc">La formule PRO pour ne jamais vendre à perte et maximiser tes bénéfices.</p>
+
+    <div class="formula-box">
+      <div class="f-label">Formule professionnelle</div>
+      <div class="f-formula">Prix de vente = Coût total ÷ (1 – Taux de profit)</div>
+      <div class="f-example">Exemple : 20 000 ÷ (1 − 0,40) = <strong>33 333 FCFA</strong> avec 40% de marge</div>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="prod">A</div>
+        <div class="cost">Coût : 10 000 FCFA</div>
+        <div class="margin-badge" style="background:#e8f5e9; color:#2e7d32;">50%</div>
+        <div class="price-val">20 000 FCFA</div>
+        <div class="profit">+10 000 FCFA</div>
+      </div>
+      <div class="price-card">
+        <div class="prod">B</div>
+        <div class="cost">Coût : 15 000 FCFA</div>
+        <div class="margin-badge" style="background:#e3f2fd; color:#1565c0;">60%</div>
+        <div class="price-val">37 500 FCFA</div>
+        <div class="profit">+22 500 FCFA</div>
+      </div>
+      <div class="price-card">
+        <div class="prod">C</div>
+        <div class="cost">Coût : 20 000 FCFA</div>
+        <div class="margin-badge" style="background:#fff8e1; color:#f57f17;">40%</div>
+        <div class="price-val">33 333 FCFA</div>
+        <div class="profit">+13 333 FCFA</div>
+      </div>
+      <div class="price-card">
+        <div class="prod">D</div>
+        <div class="cost">Coût : 8 000 FCFA</div>
+        <div class="margin-badge" style="background:#fce4ec; color:#c62828;">100%</div>
+        <div class="price-val">16 000 FCFA</div>
+        <div class="profit">+8 000 FCFA</div>
+      </div>
+      <div class="price-card">
+        <div class="prod">E</div>
+        <div class="cost">Coût : 25 000 FCFA</div>
+        <div class="margin-badge" style="background:#e8eaf6; color:#283593;">30%</div>
+        <div class="price-val">35 714 FCFA</div>
+        <div class="profit">+10 714 FCFA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6 : ERREURS -->
+<section id="erreurs" style="background: var(--cream);">
+  <div class="container">
+    <div class="section-num">Section 09</div>
+    <h2 class="section-title">Erreurs à éviter</h2>
+    <p class="section-desc">Ces 5 pièges font échouer la majorité des importateurs débutants. Lis chaque point attentivement.</p>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+
+      <div style="display:flex; gap:20px; align-items:flex-start; background:#fff; border-radius:20px; padding:24px 28px; border:1px solid #fee2e2; box-shadow: 0 2px 16px rgba(220,38,38,0.08); transition: all 0.3s;" onmouseenter="this.style.transform='translateX(8px)'" onmouseleave="this.style.transform='translateX(0)'">
+        <div style="min-width:48px; height:48px; background:linear-gradient(135deg,#dc2626,#ef4444); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px;">🔍</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:#1a1a2e; margin-bottom:6px;">Ne pas vérifier le fournisseur</div>
+          <div style="font-size:14px; color:#6b7280; line-height:1.6;">Toujours vérifier l'ancienneté, les badges, les avis et demander des photos réelles avant de payer. Un fournisseur non vérifié = risque maximal.</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:20px; align-items:flex-start; background:#fff; border-radius:20px; padding:24px 28px; border:1px solid #fee2e2; box-shadow: 0 2px 16px rgba(220,38,38,0.08); transition: all 0.3s;" onmouseenter="this.style.transform='translateX(8px)'" onmouseleave="this.style.transform='translateX(0)'">
+        <div style="min-width:48px; height:48px; background:linear-gradient(135deg,#dc2626,#ef4444); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px;">🧮</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:#1a1a2e; margin-bottom:6px;">Mal calculer son prix de vente</div>
+          <div style="font-size:14px; color:#6b7280; line-height:1.6;">Oublier les frais cachés (douane, transitaire, agent) fait vendre à perte. Utilise toujours la formule PRO : <strong style="color:#2348a0">Coût total ÷ (1 – taux de profit)</strong>.</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:20px; align-items:flex-start; background:#fff; border-radius:20px; padding:24px 28px; border:1px solid #fee2e2; box-shadow: 0 2px 16px rgba(220,38,38,0.08); transition: all 0.3s;" onmouseenter="this.style.transform='translateX(8px)'" onmouseleave="this.style.transform='translateX(0)'">
+        <div style="min-width:48px; height:48px; background:linear-gradient(135deg,#dc2626,#ef4444); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px;">📣</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:#1a1a2e; margin-bottom:6px;">Ne pas faire de marketing</div>
+          <div style="font-size:14px; color:#6b7280; line-height:1.6;">Recevoir ses produits sans plan de vente = stock mort. Prépare tes visuels WhatsApp, TikTok et Instagram <strong style="color:#2348a0">avant même la livraison</strong>.</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:20px; align-items:flex-start; background:#fff; border-radius:20px; padding:24px 28px; border:1px solid #fee2e2; box-shadow: 0 2px 16px rgba(220,38,38,0.08); transition: all 0.3s;" onmouseenter="this.style.transform='translateX(8px)'" onmouseleave="this.style.transform='translateX(0)'">
+        <div style="min-width:48px; height:48px; background:linear-gradient(135deg,#dc2626,#ef4444); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px;">📦</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:#1a1a2e; margin-bottom:6px;">Commander en trop grande quantité</div>
+          <div style="font-size:14px; color:#6b7280; line-height:1.6;">Toujours commencer avec un test sur <strong style="color:#2348a0">3 à 5 produits en petite quantité</strong> pour valider la qualité et la demande avant d'investir davantage.</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:20px; align-items:flex-start; background:#fff; border-radius:20px; padding:24px 28px; border:1px solid #fee2e2; box-shadow: 0 2px 16px rgba(220,38,38,0.08); transition: all 0.3s;" onmouseenter="this.style.transform='translateX(8px)'" onmouseleave="this.style.transform='translateX(0)'">
+        <div style="min-width:48px; height:48px; background:linear-gradient(135deg,#dc2626,#ef4444); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px;">💬</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:#1a1a2e; margin-bottom:6px;">Fournisseur qui répond mal</div>
+          <div style="font-size:14px; color:#6b7280; line-height:1.6;">Réponses vagues, lentes ou évasives = signal d'alarme. Un bon fournisseur répond vite et clairement. <strong style="color:#dc2626">Ne jamais forcer une commande</strong> dans ce cas.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Récap alerte -->
+    <div style="margin-top:28px; background:linear-gradient(135deg,#0d1b3e,#1a2f5e); border-radius:20px; padding:24px 28px; display:flex; align-items:center; gap:18px;">
+      <div style="font-size:32px;">⚠️</div>
+      <div>
+        <div style="font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:#ffd97d; margin-bottom:4px;">Règle d'or</div>
+        <div style="font-size:14px; color:rgba(255,255,255,0.65); line-height:1.6;">Chaque erreur ici peut te faire perdre ton capital de départ. Lis ce guide entièrement avant de passer ta première commande.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7 : PLAN 7 JOURS -->
+<section id="plan">
+  <div class="container">
+    <div class="section-num">Section 10</div>
+    <h2 class="section-title">Plan d'action<br>7 jours</h2>
+    <p class="section-desc">Suis ce plan pour passer ta première commande en une semaine.</p>
+
+    <div class="plan-grid">
+      <div class="plan-day"><div class="day-num">01</div><h4>Jour 1</h4><p>Créer ton compte 1688 et installer Google Lens</p></div>
+      <div class="plan-day"><div class="day-num">02</div><h4>Jour 2</h4><p>Identifier 3 produits potentiels via recherche par image</p></div>
+      <div class="plan-day"><div class="day-num">03</div><h4>Jour 3</h4><p>Contacter 5 fournisseurs différents par produit</p></div>
+      <div class="plan-day"><div class="day-num">04</div><h4>Jour 4</h4><p>Comparer les offres reçues et choisir le meilleur</p></div>
+      <div class="plan-day"><div class="day-num">05</div><h4>Jour 5</div><p>Simuler le coût total avec un agent (Superbuy)</p></div>
+      <div class="plan-day"><div class="day-num">06</div><h4>Jour 6</h4><p>Calculer le prix de vente avec la formule PRO</p></div>
+      <div class="plan-day"><div class="day-num">07</div><h4>Jour 7</h4><p>Passer la commande test et préparer le plan de vente</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8 : AUTEUR + VENTE -->
+<section class="blue">
+  <div class="container">
+    <div class="section-num" style="color: var(--gold);">Section 11 & 12</div>
+    <h2 class="section-title">L'auteure & Où acheter</h2>
+
+    <div class="author-card" style="margin-bottom: 40px;">
+      <div class="author-avatar">👩‍💼</div>
+      <div class="author-info">
+        <h3>L'auteure</h3>
+        <div class="role">Passionnée d'Import-Export • Diplômée en Commerce International</div>
+        <p>J'ai appris, souvent à mes dépens, comment éviter les erreurs et sécuriser mes achats depuis la Chine. Aujourd'hui, j'aide les débutants à réussir leurs premières importations grâce à des méthodes simples, testées et éprouvées.</p>
+      </div>
+    </div>
+
+    <div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; color: white; margin-bottom: 16px;">🛒 Me contacter directement</div>
+    <div class="platforms">
+      <a href="https://wa.me/221704967965?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20ton%20Import%20Master%20Guide%20!" target="_blank" style="text-decoration:none;">
+        <div class="plat-card wa">
+          <div class="plat-icon">💬</div>
+          <h3>WhatsApp</h3>
+          <div style="font-size:11px; color:rgba(255,255,255,0.7); margin-top:6px;">Cliquer pour écrire</div>
+        </div>
+      </a>
+      <a href="https://www.tiktok.com/@le_mbenguiste_institut" target="_blank" style="text-decoration:none;">
+        <div class="plat-card tt">
+          <div class="plat-icon">🎵</div>
+          <h3>TikTok</h3>
+          <div style="font-size:11px; color:rgba(255,255,255,0.7); margin-top:6px;">@le_mbenguiste_institut</div>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/sen_fragrance6?igsh=cnA5NmpieTM3cDNy" target="_blank" style="text-decoration:none;">
+        <div class="plat-card ig">
+          <div class="plat-icon">📸</div>
+          <h3>Instagram</h3>
+          <div style="font-size:11px; color:rgba(255,255,255,0.7); margin-top:6px;">@sen_fragrance6</div>
+        </div>
+      </a>
+      <a href="https://wa.me/221704967965?text=Bonjour%2C%20je%20souhaite%20commander%20le%20guide%20!" target="_blank" style="text-decoration:none;">
+        <div class="plat-card web">
+          <div class="plat-icon">🛒</div>
+          <h3>Commander</h3>
+          <div style="font-size:11px; color:rgba(255,255,255,0.7); margin-top:6px;">Via WhatsApp</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: var(--navy); text-align: center; padding: 32px 20px;">
+  <div style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: white; margin-bottom: 4px;">IMPORT MASTER GUIDE</div>
+  <div style="font-size: 13px; color: rgba(255,255,255,0.35);">© 2025 — Chine ➝ Sénégal • Tous droits réservés</div>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const total = document.body.scrollHeight - window.innerHeight;
+    const pct = (window.scrollY / total) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+
+  // Intersection observer for section animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section').forEach(s => {
+    observer.observe(s);
+    if (s.id === 'cover') s.classList.add('visible');
+  });
+</script>
+</body>
+</html>
